@@ -45,19 +45,19 @@ export default function TextForm(props) {
            id="myBox" rows="8"></textarea>
         </div>
 
-       <button className="btn btn-primary mx-2"
+       <button className="btn btn-primary mx-2 my-2"
        onClick = {handleUpClick}
        >
            Convert to UpperCase
        </button>
 
-       <button className="btn btn-primary mx-2"
+       <button className="btn btn-primary mx-2 my-2"
        onClick = {handleLoClick}
        >
            Convert to LowerCase
        </button>
 
-       <button className="btn btn-primary mx-2"
+       <button className="btn btn-primary mx-2 my-2"
        onClick = {handleExtraSpaces}
        >
            Trim Spaces
@@ -66,8 +66,12 @@ export default function TextForm(props) {
 
 <div className="container my-5" style = {{color : props.mode === 'dark'? 'white': 'black'}}>
   <h1>Your Text Summary</h1>
-  <p>Your Text contains <b> {text.split(" ").length}   </b> words and <b>{text.length} </b>characters</p>
-  <p>Minutes to Read <b> { 0.008 * text.split(" ").length}</b>   min </p>
+  <p>Your Text contains <b> {text.split(/\s+/).filter((element) => {
+    return element.length !== 0
+  }).length}   </b> words and <b>{text.length} </b>characters</p>
+  <p>Minutes to Read <b> { 0.008 * text.split(" ").filter((element) =>{
+    return element.length !== 0 
+  }).length}</b>   min </p>
   <h2>Preview</h2>
   <p>{text.length > 0 ? text : "Enter in the text field to preview it here"}</p>
 </div>
